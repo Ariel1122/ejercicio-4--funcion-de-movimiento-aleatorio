@@ -5,10 +5,10 @@ function setup() {
 }
 
 function draw() {
-  // fill(0);
-  noFill();
-  // stroke(255);
-  stroke(255, 20);
+  fill(0);
+  // noFill();
+  stroke(255);
+  // stroke(255, 20);
   strokeWeight(2);
   // tamaño del contorno de la linea -trazo
 
@@ -23,11 +23,25 @@ function draw() {
   // si el usuario presiona el mouse, es una accion verdadera, procede a realizar la siguiente operación {}
 
   if (mouseIsPressed == true) {
-    circle(mouseX, mouseY, random(10, 100));
+    // circle(mouseX, mouseY, random(10, 100));
+    // aqui colocamos la funcion my pattern
+    // al ser una funcion que np es p5 el codigo toma los parametros de la funcion establecida al final
+    // le pasamos poscion en x y y , y la dimencion, y la amp, amplitud
+    myPattern(mouseX, mouseY, 50, mouseY / 10);
   }
 }
 function keyPressed() {
   save("dibujo.png");
   background(0);
 }
-function myPattern(x, y, d) {}
+// posicion en x, y, diametro, y amplitud de desplazamiento de los puntos
+function myPattern(x, y, d, amp) {
+  // agruparemos los comandos y comenzamos a dibujan el poligono con begim shape
+  beginShape();
+  vertex(x - d / 2 + random(-amp, amp), y - d / 2 + random(-amp, amp)); //0
+  vertex(x + d / 2 + random(-amp, amp), y - d / 2 + random(-amp, amp)); //1
+  vertex(x + d / 2 + random(-amp, amp), y + d / 2 + random(-amp, amp)); //2
+  vertex(x - d / 2 + random(-amp, amp), y + d / 2 + random(-amp, amp)); //3
+  endShape(CLOSE);
+  // ES NECESARIO CERRAR PARA CONECTAR LOS PUNTOS
+}
